@@ -54,31 +54,6 @@
     a { text-decoration: none; color: inherit; }
     button { border: none; background: none; cursor: pointer; font-family: inherit; }
 
-    /* ─────────────────────────────────────────────
-       CURSOR PERSONALIZADO
-    ───────────────────────────────────────────── */
-    .cursor {
-      width: 10px; height: 10px;
-      background: var(--dark);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none;
-      z-index: 10000;
-      transform: translate(-50%, -50%);
-      transition: width 0.3s, height 0.3s, background 0.3s;
-    }
-    .cursor-follower {
-      width: 36px; height: 36px;
-      border: 1px solid var(--dark);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.12s ease, width 0.3s, height 0.3s, border-color 0.3s;
-    }
-    .cursor.expand { width: 16px; height: 16px; }
-    .cursor-follower.expand { width: 56px; height: 56px; border-color: var(--brown-light); }
 
     /* ─────────────────────────────────────────────
        NAVBAR
@@ -460,13 +435,12 @@
     .proj-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(28,25,22,0.7) 0%, transparent 55%);
-      opacity: 0;
+      opacity: 1;
       transition: opacity var(--transition);
       display: flex; flex-direction: column;
       justify-content: flex-end;
       padding: 28px;
     }
-    .proj-card:hover .proj-overlay { opacity: 1; }
 
     .proj-num {
       font-family: var(--serif);
@@ -886,7 +860,6 @@
 
       .sobre-numbers { grid-template-columns: 1fr 1fr; }
 
-      .cursor, .cursor-follower { display: none; }
     }
   </style>
 </head>
@@ -898,9 +871,6 @@
 <div class="loading-bar"></div>
 </div>
 </div>
-<!-- ── CURSOR ── -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-follower" id="cursorFollower"></div>
 <!-- ══════════════════════════════════════════
        NAVBAR
   ═══════════════════════════════════════════ -->
@@ -994,7 +964,7 @@ projeto, porque acreditamos que cada produção é única e merece uma experiên
 <p class="section-label reveal">Espaço em uso</p>
 <h2 class="portfolio-title reveal reveal-delay-1" id="portfolio-title">Serviços e Produções recentes</h2>
 </div>
-<a class="portfolio-link reveal reveal-delay-2" href="#contato" id="portfolio-all-link">Ver todas as produções</a>
+<a class="portfolio-link reveal reveal-delay-2" href="#contato" id="portfolio-all-link">Reservar o Estúdio</a>
 </div>
 <div class="portfolio-grid">
 <article class="proj-card reveal" id="proj-card-1">
@@ -1192,38 +1162,6 @@ projeto, porque acreditamos que cada produção é única e merece uma experiên
         // Inicia animação parallax do hero
         document.getElementById('heroBg').style.transform = 'scale(1)';
       }, 1800);
-    });
-
-    /* ── CURSOR ── */
-    const cursor = document.getElementById('cursor');
-    const follower = document.getElementById('cursorFollower');
-    let mouseX = 0, mouseY = 0;
-    let followerX = 0, followerY = 0;
-
-    document.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursor.style.left = mouseX + 'px';
-      cursor.style.top  = mouseY + 'px';
-    });
-
-    (function animateFollower() {
-      followerX += (mouseX - followerX) * 0.12;
-      followerY += (mouseY - followerY) * 0.12;
-      follower.style.left = followerX + 'px';
-      follower.style.top  = followerY + 'px';
-      requestAnimationFrame(animateFollower);
-    })();
-
-    document.querySelectorAll('a, button, .proj-card').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.classList.add('expand');
-        follower.classList.add('expand');
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.classList.remove('expand');
-        follower.classList.remove('expand');
-      });
     });
 
     /* ── NAVBAR SCROLL ── */
