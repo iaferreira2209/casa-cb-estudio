@@ -885,7 +885,24 @@
 
       .hero-content { padding: 0 24px 160px; }
       .hero-scroll { right: 24px; bottom: 52px; }
-      .hero-social { display: none; }
+
+      /* Mobile: ícones horizontais no canto inferior direito */
+      .hero-social {
+        right: 24px; bottom: 130px; top: auto;
+        transform: none;
+        flex-direction: row;
+        gap: 12px;
+      }
+      .hero-social-line {
+        width: 24px; height: 1px;
+        background: linear-gradient(to right, transparent, rgba(247,244,238,0.3), transparent);
+      }
+      .hero-social a {
+        width: 36px; height: 36px;
+      }
+      .hero-social svg {
+        width: 15px; height: 15px;
+      }
 
       .portfolio-grid { grid-template-columns: 1fr; }
       .proj-card:nth-child(n) { grid-column: 1 / 2; grid-row: auto; height: 280px; }
